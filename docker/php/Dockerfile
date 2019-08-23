@@ -1,5 +1,4 @@
 FROM php:7.3-fpm-alpine
-
 ARG TZ
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HOME /composer
