@@ -1,7 +1,7 @@
 # docker_for_laravel
 
 - laravel
-http://localhost:8000
+http://127.0.0.1:10080
 
 - 新規のlaravelプロジェクトを始めるには
 1. php のコンテナに入る
