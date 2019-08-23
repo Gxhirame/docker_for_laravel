@@ -3,6 +3,9 @@
 - laravel
 http://127.0.0.1:10080
 
+# Docker環境を整える
+1. docker-compose up -d --build
+
 - 新規のlaravelプロジェクトを始めるには
 1. php のコンテナに入る
 `docker-compose exec app ash`
