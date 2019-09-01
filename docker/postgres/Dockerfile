@@ -1,6 +1,9 @@
-FROM postgres:9.3
+FROM postgres:9.4-alpine
 
-RUN apt-get update && \
-    localedef -i ja_JP -c -f UTF-8 -A /usr/share/locale/locale.alias ja_JP.UTF-8
+RUN apk update \
+    && apk upgrade \
+    && apk --update add logrotate \
+    && apk add --no-cache openssl \
+    && apk add --no-cache bash \
 
-ENV LANG ja_JP.UTF-8
+#ENV LANG ja_JP.UTF-8

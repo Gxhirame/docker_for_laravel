@@ -1,5 +1,9 @@
-FROM nginx:latest
+#ARG NGINX_VERSION
 
-RUN apt-get update -y
+FROM nginx:1.17-alpine
 
-ADD vhost.conf /etc/nginx/conf.d
+RUN apk update \
+    && apk upgrade \
+    && apk --update add logrotate \
+    && apk add --no-cache openssl \
+    && apk add --no-cache bash \

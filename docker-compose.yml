@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+  #php
   php:
     build:
       context: ./docker/php
@@ -8,8 +9,10 @@ services:
         - TZ=${TZ}
     volumes:
       - ./code:/work
-      - ./logs:/var/log/php
-      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./Docker/php/logs:/var/log/php
+      - ./Docker/php/php.ini:/usr/local/etc/php/php.ini
+    ports:
+      - 9000:9000
     working_dir: /work
     environment:
       - DB_CONNECTION=mysql
@@ -18,46 +21,83 @@ services:
       - DB_USERNAME=${DB_USER}
       - DB_PASSWORD=${DB_PASS}
       - TZ=${TZ}
+
+  #mysql
   mysql:
-    build: ./docker/mysql
+    build:
+      context: ./Docker/mysql
     volumes:
       - db-store:/var/lib/mysql
-      - ./logs:/var/log/mysql
+      - ./Docker/mysql/logs:/var/log/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - 3306:3306
     environment:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_USER_PASS}
-      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
       - TZ=${TZ}
-    ports:
-      - 3306:3306
+
+  #postgres
   postgres:
-    build: ./docker/postgres
-    volumes:
-      - db-store:/var/lib/postgres
-      - ./logs:/var/log/postgres
-    #      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    build:
+      context: ./Docker/postgres
+      args:
+        - POSTGRES_VERSION=${POSTGRES_VERSION}
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_DATABASE=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_USER_PASS}
-      - POSTGRES_ROOT_PASSWORD=${DB_ROOT_PASS}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_ROOT_PASSWORD=${DB_PASS}
       - TZ=${TZ}
-    ports:
-      - 5432:5432
+
+  #nginx
   nginx:
-    build: ./docker/nginx
+    build:
+      context: ./Docker/nginx
+      args:
+        - NGINX_VERSION=${NGINX_VERSION}
+    depends_on:
+      - php
+    ports:
+      - 80:80
+    volumes:
+      - ./code:/work
+      - ./Docker/nginx/logs:/var/log/nginx
+      - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/default.conf
+    environment:
+      - TZ=${TZ}
+
+  #apache
+  apache:
+    build:
+      context: ./Docker/apache
+      args:
+        - APACHE_VERSION=${APACHE_VERSION}
     depends_on:
       - php
     ports:
       - 8080:80
     volumes:
       - ./code:/work
-      - ./logs:/var/log/nginx
-      - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/vhost.conf
-    environment:
-      - TZ=${TZ}
+      - ./Docker/apache/logs:/var/log/apache
+      - ./Docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./Docker/apache/index.html:/usr/local/apache2/htdocs/index.html
+
+  # adminer
+#  adminer:
+
+  # phpmyadmin
+#  myadmin:
+
+  #mailhog
+#  mailhog:
+
+  #workspace
+  #  workspace:
 
 volumes:
   db-store:
