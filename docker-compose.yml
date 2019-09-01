@@ -90,9 +90,6 @@ services:
   # adminer
 #  adminer:
 
-  # phpmyadmin
-#  myadmin:
-
   #mailhog
 #  mailhog:
 
