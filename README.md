@@ -26,3 +26,13 @@ http://localhost:8080/
    3. laravelの確認
    `php artisan -V`
    ->Laravel Framework 5.8.32 だと成功
+
+## コンテナに入る方法
+- php
+`docker-compose exec php ash`
+- apache
+`docker-compose exec apache ash`
+- nginx
+`docker-compose exec nginx ash`
+- mysql
+`docker-compose exec mysql bash`
