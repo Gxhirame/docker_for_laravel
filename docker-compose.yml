@@ -32,6 +32,8 @@ services:
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - 3306:3306
+    depends_on:
+      - php
     environment:
       - MYSQL_DATABASE=${DB_NAME}
       - MYSQL_USER=${DB_USER}
@@ -47,6 +49,8 @@ services:
         - POSTGRES_VERSION=${POSTGRES_VERSION}
     ports:
       - 5432:5432
+    depends_on:
+      - php
     environment:
       - POSTGRES_DATABASE=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
@@ -59,11 +63,11 @@ services:
     build:
       context: ./Docker/nginx
       args:
-        - NGINX_VERSION=${NGINX_VERSION}
-    depends_on:
-      - php
+        - NGINX_VERSION=${NGINX_VERSIO
     ports:
       - 80:80
+    depends_on:
+      - php
     volumes:
       - ./code:/work
       - ./Docker/nginx/logs:/var/log/nginx
@@ -77,10 +81,10 @@ services:
       context: ./Docker/apache
       args:
         - APACHE_VERSION=${APACHE_VERSION}
-    depends_on:
-      - php
     ports:
       - 8080:80
+    depends_on:
+      - php
     volumes:
       - ./code:/work
       - ./Docker/apache/logs:/var/log/apache
