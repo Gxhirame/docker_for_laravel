@@ -27,7 +27,7 @@ services:
     build:
       context: ./Docker/mysql
     volumes:
-      - db-store:/var/lib/mysql
+      - ./Docker/mysql/data:/var/lib/mysql
       - ./Docker/mysql/logs:/var/log/mysql
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
@@ -63,7 +63,7 @@ services:
     build:
       context: ./Docker/nginx
       args:
-        - NGINX_VERSION=${NGINX_VERSIO
+        - NGINX_VERSION=${NGINX_VERSION}
     ports:
       - 80:80
     depends_on:

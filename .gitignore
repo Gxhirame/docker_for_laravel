@@ -1,3 +1,19 @@
 .env
-logs*
+
+# プロジェクト
 code/
+
+
+  ##########
+ # mysql #
+#########
+#ログファイル
+/docker/mysql/logs/
+# 永続化するデータ
+/docker/mysql/data/
+
+  #########
+ # Nginx #
+#########
+/docker/nginx/logs/
+
