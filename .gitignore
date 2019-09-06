@@ -5,7 +5,7 @@ code/
 
 
   ##########
- # mysql #
+ # Mysql #
 #########
 #ログファイル
 /docker/mysql/logs/
