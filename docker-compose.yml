@@ -4,7 +4,7 @@ services:
   #php
   php:
     build:
-      context: ./docker/php
+      context: Docker/php
       args:
         - PHP_VERSION=${PHP_VERSION}
         - TZ=${TZ}
@@ -13,7 +13,7 @@ services:
       - ./Docker/php/logs:/var/log/php
       - ./Docker/php/php.ini:/usr/local/etc/php/php.ini
     ports:
-      - 9000:9000
+      - ${PHP_PORT}:9000
     working_dir: /work
     environment:
       - DB_CONNECTION=mysql
@@ -32,9 +32,9 @@ services:
     volumes:
       - ./Docker/mysql/data:/var/lib/mysql
       - ./Docker/mysql/logs:/var/log/mysql
-      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./Docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
-      - 3306:3306
+      - ${MYSQL_PORT}:3306
     depends_on:
       - php
     environment:
@@ -51,7 +51,7 @@ services:
       args:
         - POSTGRES_VERSION=${POSTGRES_VERSION}
     ports:
-      - 5432:5432
+      - ${POSTGRES_PORT}:5432
     depends_on:
       - php
     environment:
@@ -68,13 +68,14 @@ services:
       args:
         - NGINX_VERSION=${NGINX_VERSION}
     ports:
-      - 80:80
+      - ${NGINX_PORT}:80
     depends_on:
       - php
     volumes:
       - ./code:/work
       - ./Docker/nginx/logs:/var/log/nginx
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./Docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./Docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     environment:
       - TZ=${TZ}
 
@@ -85,7 +86,7 @@ services:
       args:
         - APACHE_VERSION=${APACHE_VERSION}
     ports:
-      - 8080:80
+      - ${APACHE_PORT}:80
     depends_on:
       - php
     volumes:
