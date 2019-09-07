@@ -1,4 +1,6 @@
-FROM mysql:8.0
+ARG MYSQL_VERSION
+
+FROM ${MYSQL_VERSION}
 
 RUN apt-get update && \
     apt-get install -y locales && \

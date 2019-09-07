@@ -6,6 +6,7 @@ services:
     build:
       context: ./docker/php
       args:
+        - PHP_VERSION=${PHP_VERSION}
         - TZ=${TZ}
     volumes:
       - ./code:/work
@@ -26,6 +27,8 @@ services:
   mysql:
     build:
       context: ./Docker/mysql
+      args:
+        - MYSQL_VERSION=${MYSQL_VERSION}
     volumes:
       - ./Docker/mysql/data:/var/lib/mysql
       - ./Docker/mysql/logs:/var/log/mysql

@@ -1,6 +1,6 @@
-#ARG NGINX_VERSION
+ARG NGINX_VERSION
 
-FROM nginx:1.17-alpine
+FROM ${NGINX_VERSION}
 
 RUN apk update \
     && apk upgrade \

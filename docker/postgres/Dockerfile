@@ -1,4 +1,6 @@
-FROM postgres:9.4-alpine
+ARG POSTGRES_VERSION
+
+FROM ${POSTGRES_VERSION}
 
 RUN apk update \
     && apk upgrade \
