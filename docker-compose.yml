@@ -17,10 +17,11 @@ services:
     working_dir: /work
     environment:
       - DB_CONNECTION=mysql
-      - DB_HOST=${DB_HOST}
-      - DB_DATABASE=${DB_NAME}
-      - DB_USERNAME=${DB_USER}
-      - DB_PASSWORD=${DB_PASS}
+      - DB_HOST=${MYSQL_DB_HOST}
+      - DB_DATABASE=${MYSQL_DB_NAME}
+      - DB_USERNAME=${MYSQL_DB_USER}
+      - DB_PASSWORD=${MYSQL_DB_USER_PASS}
+      - DB_ROOT_PASSWORD=${MYSQL_DB_ROOT_PASS}
       - TZ=${TZ}
 
   #mysql
@@ -38,10 +39,11 @@ services:
     depends_on:
       - php
     environment:
-      - MYSQL_DATABASE=${DB_NAME}
-      - MYSQL_USER=${DB_USER}
-      - MYSQL_PASSWORD=${DB_PASS}
-      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${MYSQL_DB_NAME}
+      - MYSQL_HOST=${MYSQL_DB_HOST}
+      - MYSQL_USER=${MYSQL_DB_USER}
+      - MYSQL_PASSWORD=${MYSQL_DB_USER_PASS}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_DB_ROOT_PASS}
       - TZ=${TZ}
 
   #postgres
@@ -55,10 +57,11 @@ services:
     depends_on:
       - php
     environment:
-      - POSTGRES_DATABASE=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASS}
-      - POSTGRES_ROOT_PASSWORD=${DB_PASS}
+      - POSTGRES_DATABASE=${POSTGRES_DB_NAME}
+      - POSTGRES_HOST=${POSTGRES_DB_HOST}
+      - POSTGRES_USER=${POSTGRES_DB_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_DB_USER_PASS}
+      - POSTGRES_ROOT_PASSWORD=${POSTGRES_DB_ROOT_PASS}
       - TZ=${TZ}
 
   #nginx
