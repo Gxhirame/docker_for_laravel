@@ -40,7 +40,6 @@ services:
       - php
     environment:
       - MYSQL_DATABASE=${MYSQL_DB_NAME}
-      - MYSQL_HOST=${MYSQL_DB_HOST}
       - MYSQL_USER=${MYSQL_DB_USER}
       - MYSQL_PASSWORD=${MYSQL_DB_USER_PASS}
       - MYSQL_ROOT_PASSWORD=${MYSQL_DB_ROOT_PASS}
