@@ -4,14 +4,14 @@ services:
   #php
   php:
     build:
-      context: Docker/php
+      context: .Docker/php
       args:
         - PHP_VERSION=${PHP_VERSION}
         - TZ=${TZ}
     volumes:
       - ./code:/work
-      - ./Docker/php/logs:/var/log/php
-      - ./Docker/php/php.ini:/usr/local/etc/php/php.ini
+      - ./.Docker/php/logs:/var/log/php
+      - ./.Docker/php/php.ini:/usr/local/etc/php/php.ini
     ports:
       - ${PHP_PORT}:9000
     working_dir: /work
@@ -27,13 +27,13 @@ services:
   #mysql
   mysql:
     build:
-      context: ./Docker/mysql
+      context: .Docker/mysql
       args:
         - MYSQL_VERSION=${MYSQL_VERSION}
     volumes:
-      - ./Docker/mysql/data:/var/lib/mysql
-      - ./Docker/mysql/logs:/var/log/mysql
-      - ./Docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./.Docker/mysql/data:/var/lib/mysql
+      - ./.Docker/mysql/logs:/var/log/mysql
+      - ./.Docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - ${MYSQL_PORT}:3306
     depends_on:
@@ -48,7 +48,7 @@ services:
   #postgres
   postgres:
     build:
-      context: ./Docker/postgres
+      context: .Docker/postgres
       args:
         - POSTGRES_VERSION=${POSTGRES_VERSION}
     ports:
@@ -66,7 +66,7 @@ services:
   #nginx
   nginx:
     build:
-      context: ./Docker/nginx
+      context: .Docker/nginx
       args:
         - NGINX_VERSION=${NGINX_VERSION}
     ports:
@@ -75,16 +75,16 @@ services:
       - php
     volumes:
       - ./code:/work
-      - ./Docker/nginx/logs:/var/log/nginx
-      - ./Docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./Docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./.Docker/nginx/logs:/var/log/nginx
+      - ./.Docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./.Docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     environment:
       - TZ=${TZ}
 
   #apache
   apache:
     build:
-      context: ./Docker/apache
+      context: .Docker/apache
       args:
         - APACHE_VERSION=${APACHE_VERSION}
     ports:
@@ -93,9 +93,9 @@ services:
       - php
     volumes:
       - ./code:/work
-      - ./Docker/apache/logs:/var/log/apache
-      - ./Docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
-      - ./Docker/apache/index.html:/usr/local/apache2/htdocs/index.html
+      - ./.Docker/apache/logs:/var/log/apache
+      - ./.Docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./.Docker/apache/index.html:/usr/local/apache2/htdocs/index.html
 
   # adminer
 #  adminer:

@@ -8,12 +8,12 @@ code/
  # Mysql
 #--------------------
 #ログファイル
-/docker/mysql/logs/
+/.Docker/mysql/logs/
 # 永続化するデータ
-/docker/mysql/data/
+/.Docker/mysql/data/
 
   #--------------------
  # Nginx
 #--------------------
-/docker/nginx/logs/
+/.Docker/nginx/logs/
 
