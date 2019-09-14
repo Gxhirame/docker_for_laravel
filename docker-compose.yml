@@ -3,6 +3,7 @@ version: "3"
 services:
   #php
   php:
+    container_name: docker_for_laravel_php
     build:
       context: .Docker/php
       args:
@@ -26,6 +27,7 @@ services:
 
   #mysql
   mysql:
+    container_name: docker_for_laravel_mysql
     build:
       context: .Docker/mysql
       args:
@@ -47,6 +49,7 @@ services:
 
   #postgres
   postgres:
+    container_name: docker_for_laravel_postgres
     build:
       context: .Docker/postgres
       args:
@@ -65,6 +68,7 @@ services:
 
   #nginx
   nginx:
+    container_name: docker_for_laravel_nginx
     build:
       context: .Docker/nginx
       args:
@@ -83,6 +87,7 @@ services:
 
   #apache
   apache:
+    container_name: docker_for_laravel_apache
     build:
       context: .Docker/apache
       args:
@@ -96,9 +101,6 @@ services:
       - ./.Docker/apache/logs:/var/log/apache
       - ./.Docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./.Docker/apache/index.html:/usr/local/apache2/htdocs/index.html
-
-  # adminer
-#  adminer:
 
   #mailhog
 #  mailhog:
