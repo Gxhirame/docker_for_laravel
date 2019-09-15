@@ -13,6 +13,14 @@ code/
 /.Docker/mysql/data/
 
   #--------------------
+ # Postgres
+#--------------------
+#ログフォルダ
+/.Docker/postgres/log
+#データフォルダ
+/.Docker/postgres/data
+
+  #--------------------
  # Nginx
 #--------------------
 /.Docker/nginx/logs/

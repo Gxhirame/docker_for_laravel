@@ -54,17 +54,23 @@ services:
       context: .Docker/postgres
       args:
         - POSTGRES_VERSION=${POSTGRES_VERSION}
+    volumes:
+      - .Docker/postgres/data:/var/lib/postgresql/data
+      - .Docker/postgres/postgresql.conf:/var/lib/pgsql/data/postgresql.conf
+      - .Docker/postgres/logs:/var/lib/pgsql/data/pg_log #TODO:要修正
     ports:
       - ${POSTGRES_PORT}:5432
     depends_on:
       - php
     environment:
-      - POSTGRES_DATABASE=${POSTGRES_DB_NAME}
-      - POSTGRES_HOST=${POSTGRES_DB_HOST}
-      - POSTGRES_USER=${POSTGRES_DB_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_DB_USER_PASS}
-      - POSTGRES_ROOT_PASSWORD=${POSTGRES_DB_ROOT_PASS}
       - TZ=${TZ}
+      - POSTGRES_PASSWORD=${POSTGRES_PASS}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - PGDATA=${POSTGRES_DATA}
+#      - POSTGRES_INITDB_ARGS=
+#      - POSTGRES_INITDB_WALDIR=
+    user: root
 
   #nginx
   nginx:
