@@ -22,22 +22,26 @@
 `apache` or `nginx`  
 をdocker-compose.ymlでコメントアウトする
 4. dockerビルド  
-`docker-compose up -d --build`
-5. laravelプロジェクトを作る  
+`docker-compose build`  
+6. dockerコンテナ作成  
+`docker-compose up -d`  
+7. laravelプロジェクトを作る  
    1. php のコンテナに入る  
-   `docker-compose exec php bash(or ash)`  
+   `docker-compose exec php bash`  
    2. git からlaravelのプロジェクトを落としてくる  
    `composer create-project --prefer-dist "laravel/laravel=5.8.*" .`  
    3. laravelの確認  
    `php artisan -V`  
-   ->Laravel Framework 5.8.32 だと成功  
+   ->Laravel Framework 5.8.32 だと良き  
 
 ## コンテナに入る方法
 - php  
-`docker-compose exec php bash(or ash)`
+`docker-compose exec php bash`
 - apache  
-`docker-compose exec apache bash(or ash)`
+`docker-compose exec apache bash`
 - nginx  
-`docker-compose exec nginx bash(or ash)`
+`docker-compose exec nginx bash`
 - mysql  
-`docker-compose exec mysql bash`
+`docker-compose exec mysql bash`  
+- workspace  
+`docker-compose exec workspace bash`

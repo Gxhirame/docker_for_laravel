@@ -56,6 +56,7 @@ services:
       args:
         - POSTGRES_VERSION=postgres:${POSTGRES_VERSION}
     volumes:
+      - ${HOST_DIR}:${CONTAINER_DIR}
       - .Docker/postgres/data:/var/lib/postgresql/data
       - .Docker/postgres/postgresql.conf:/var/lib/pgsql/data/postgresql.conf
       - .Docker/postgres/logs:/var/lib/pgsql/data/pg_log #TODO:要修正
@@ -65,7 +66,6 @@ services:
       - php
     environment:
       - TZ=${TZ}
-      - ${HOST_DIR}:${CONTAINER_DIR}
       - POSTGRES_PASSWORD=${POSTGRES_PASS}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_DB=${POSTGRES_DB}
