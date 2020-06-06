@@ -50,16 +50,16 @@
 ## このプロジェクト単体  
 ``` bash
 docker_for_laravel
-├──.Docker
-│   ├──apache
-│   ├──mysql
-│   ├──nginx
-│   ├──php
-│   ├──postgres
-│   └──workspace
-├──src
-├──.env.example
-└──docker-compose.yml
+├── .Docker
+│   ├── apache
+│   ├── mysql
+│   ├── nginx
+│   ├── php
+│   ├── postgres
+│   └── workspace
+├── src
+├── .env.example
+└── docker-compose.yml
 ```
 
 ## 使用する際のプロジェクト
