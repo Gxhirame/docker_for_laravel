@@ -1,20 +1,39 @@
 # docker_for_laravel
+## ディレクトリ構成
+### このプロジェクト単体  
+``` bash
+docker_for_laravel
+├── .Docker
+│   ├── apache
+│   ├── mysql
+│   ├── nginx
+│   ├── php
+│   ├── postgres
+│   └── workspace
+├── src
+├── .env.example
+└── docker-compose.yml
+```
 
-サイト : http://127.0.0.1:80
+### 使用する際のプロジェクト
+``` bash
+new_project_name
+└── docker_for_laravel
+   ├── .Docker
+   │   ├── apache
+   │   ├── mysql
+   │   ├── nginx
+   │   ├── php
+   │   ├── postgres
+   │   └── workspace
+   ├── src
+   │   ├── laravel_directory
+   │   └── ••• 
+   ├── .env.example
+   └── docker-compose.yml
+```
 
-- laravel : 9000
-
-- mysql : 3002
-
-- postgres : 5432
-
-- nginx : 80
-
-- apache : 8080
-
-
-
-# Docker環境を整える
+## Docker環境を整える
 1. envファイル作成  
 `cp .env.example .env`
 2. envファイルを書き換える
@@ -45,39 +64,5 @@
 `docker-compose exec mysql bash`  
 - workspace  
 `docker-compose exec workspace bash`
-
-# ディレクトリ構成
-## このプロジェクト単体  
-``` bash
-docker_for_laravel
-├── .Docker
-│   ├── apache
-│   ├── mysql
-│   ├── nginx
-│   ├── php
-│   ├── postgres
-│   └── workspace
-├── src
-├── .env.example
-└── docker-compose.yml
-```
-
-## 使用する際のプロジェクト
-``` bash
-new_project_name
-└── docker_for_laravel
-   ├── .Docker
-   │   ├── apache
-   │   ├── mysql
-   │   ├── nginx
-   │   ├── php
-   │   ├── postgres
-   │   └── workspace
-   ├── src
-   │   ├── laravel_directory
-   │   └── ••• 
-   ├── .env.example
-   └── docker-compose.yml
-```
     
 
