@@ -46,7 +46,8 @@
 - workspace  
 `docker-compose exec workspace bash`
 
-# このプロジェクトのディレクトリ構成  
+# ディレクトリ構成
+## このプロジェクト単体  
 ``` bash
 docker_for_laravel
 ├──.Docker
@@ -59,6 +60,24 @@ docker_for_laravel
 ├──src
 ├──.env.example
 └──docker-compose.yml
+```
+
+## 使用する際のプロジェクト
+``` bash
+new_project_name
+└── docker_for_laravel
+   ├── .Docker
+   │   ├── apache
+   │   ├── mysql
+   │   ├── nginx
+   │   ├── php
+   │   ├── postgres
+   │   └── workspace
+   ├── src
+   │   ├── laravel_directory
+   │   └── ••• 
+   ├── .env.example
+   └── docker-compose.yml
 ```
     
 
