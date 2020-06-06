@@ -45,3 +45,20 @@
 `docker-compose exec mysql bash`  
 - workspace  
 `docker-compose exec workspace bash`
+
+# このプロジェクトのディレクトリ構成  
+``` bash
+docker_for_laravel
+├──.Docker
+│   ├──apache
+│   ├──mysql
+│   ├──nginx
+│   ├──php
+│   ├──postgres
+│   └──workspace
+├──src
+├──.env.example
+└──docker-compose.yml
+```
+    
+
