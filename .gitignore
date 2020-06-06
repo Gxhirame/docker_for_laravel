@@ -2,13 +2,11 @@
 .env
 
 # プロジェクトディレクトリ
-code/
+src/
 
   #--------------------
  # Mysql
 #--------------------
-#ログファイル
-/.Docker/mysql/logs/
 # 永続化するデータ
 /.Docker/mysql/data/
 
@@ -20,8 +18,6 @@ code/
 #データフォルダ
 /.Docker/postgres/data
 
-  #--------------------
- # Nginx
-#--------------------
-/.Docker/nginx/logs/
+# ログ
+Logs
 
