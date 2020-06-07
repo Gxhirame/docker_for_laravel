@@ -11,11 +11,11 @@ services:
         - TZ=${TZ}
     volumes:
       - ${HOST_DIR}:${CONTAINER_DIR}
-      - ./.Docker/php/logs:/var/log/php
+      - ${LOG_DIR}/php:/var/log/php
       - ./.Docker/php/php.ini:/usr/local/etc/php/php.ini
     ports:
       - ${PHP_PORT}:9000
-    working_dir: /work
+    working_dir: ${CONTAINER_DIR}
     environment:
       - DB_CONNECTION=mysql
       - DB_HOST=${MYSQL_DB_HOST}
@@ -34,8 +34,8 @@ services:
         - MYSQL_VERSION=mysql:${MYSQL_VERSION}
     volumes:
       - ${HOST_DIR}:${CONTAINER_DIR}
+      - ${LOG_DIR}/mysql:/var/log/mysql
       - ./.Docker/mysql/data:/var/lib/mysql
-      - ./.Docker/mysql/logs:/var/log/mysql
       - ./.Docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     ports:
       - ${MYSQL_PORT}:3306
@@ -57,18 +57,20 @@ services:
         - POSTGRES_VERSION=postgres:${POSTGRES_VERSION}
     volumes:
       - ${HOST_DIR}:${CONTAINER_DIR}
+      - ${LOG_DIR}/postgres:/var/log/postgres
+      - .Docker/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - .Docker/postgres/data:/var/lib/postgresql/data
-      - .Docker/postgres/postgresql.conf:/var/lib/pgsql/data/postgresql.conf
       - .Docker/postgres/logs:/var/lib/pgsql/data/pg_log #TODO:要修正
+      - .Docker/postgres/postgresql.conf:/var/lib/pgsql/data/postgresql.conf
     ports:
       - ${POSTGRES_PORT}:5432
     depends_on:
       - php
     environment:
       - TZ=${TZ}
-      - POSTGRES_PASSWORD=${POSTGRES_PASS}
-      - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASS}
       - PGDATA=${POSTGRES_DATA}
     #      - POSTGRES_INITDB_ARGS=
     #      - POSTGRES_INITDB_WALDIR=
@@ -87,7 +89,7 @@ services:
       - php
     volumes:
       - ${HOST_DIR}:${CONTAINER_DIR}
-      - ./.Docker/nginx/logs:/var/log/nginx
+      - ${LOG_DIR}/nginx:/var/log/nginx
       - ./.Docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./.Docker/nginx/nginx.conf:/etc/nginx/nginx.conf
     environment:
@@ -106,7 +108,7 @@ services:
       - php
     volumes:
       - ${HOST_DIR}:${CONTAINER_DIR}
-      - ./.Docker/apache/logs:/var/log/apache
+      - ${LOG_DIR}/apache:/var/log/apache
       - ./.Docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./.Docker/apache/index.html:/usr/local/apache2/htdocs/index.html
 
