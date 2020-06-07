@@ -2,6 +2,8 @@ ARG POSTGRES_VERSION
 
 FROM ${POSTGRES_VERSION}
 
+CMD ["postgres"]
+
 # -e:エラーが出たらそこで中断, -u:未定義の変数でエラーを出す, -x:実行したコマンドを全て標準エラー出力に出す
 RUN set -eux \
   && apt-get update \
